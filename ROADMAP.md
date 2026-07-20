@@ -21,7 +21,7 @@
   - Drop both into `~/Downloads/`
   - Run `python build_from_csv.py`
   - Commit `data.js`
-  - Netlify auto-deploys
+  - Deployed to AWS
 - [ ] Add a "Reviewer's Quick-Start" section (3 steps a new IAM team member can follow)
 - [ ] Add a "File map" table
 - [ ] Add a "Where to file bugs / suggestions" section

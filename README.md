@@ -20,10 +20,10 @@ The site is a zero-build, zero-framework, vanilla-JS static page. Open `index.ht
 ## Shareable URL
 
 ```
-https://[site-name].netlify.app/
+https://documentation.cloverhealth.com/iamaccessatlas/
 ```
 
-Update this after Netlify deployment. The site lives at the site root (`/`), not a sub-path.
+The site is hosted in Amazon Web Services (AWS).
 
 ---
 
@@ -75,7 +75,7 @@ Python 3.8+ with no third-party dependencies (uses only the standard library).
 
    The script prints the counts of apps and roles written, and warns about any apps with no roles.
 
-3. Commit and push the regenerated `data.js`. Netlify auto-deploys within ~30 seconds.
+3. Commit and push the regenerated `data.js`.
 
 ---
 
@@ -87,19 +87,15 @@ Open `uar_data.js`, update the `cycle`, `generated` date, and the `reviews` arra
 
 ---
 
-## Deploying to Netlify (first time only)
+## Hosting
 
-1. Create a **private** GitHub repo for this folder.
-2. Push all files to `main`.
-3. Go to [netlify.com](https://netlify.com) → **Add new site** → **Import an existing project**.
-4. Connect GitHub, select the repo.
-5. Build settings:
-   - **Build command**: *(leave blank)*
-   - **Publish directory**: `.`
-6. Click **Deploy site**. Netlify assigns a URL like `https://clover-iam-roles.netlify.app`.
-7. Share that URL in UAR campaign emails and onboarding messages.
+The site is hosted in **Amazon Web Services (AWS)** at:
 
-Optional: configure a custom domain under **Site settings → Domain management**.
+```
+https://documentation.cloverhealth.com/iamaccessatlas/
+```
+
+Share that URL in UAR campaign emails and onboarding messages.
 
 ---
 

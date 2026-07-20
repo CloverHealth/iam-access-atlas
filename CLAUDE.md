@@ -12,7 +12,7 @@
 - **Primary use cases:**
   1. Managers verifying roles during UAR campaigns
   2. Staff looking up what their own role grants them
-- **Hosting model:** Public site (Netlify), broadly shareable URL — no auth by design, so it works inside campaign emails and onboarding messages
+- **Hosting model:** Public site (Amazon Web Services), broadly shareable URL — no auth by design, so it works inside campaign emails and onboarding messages. Live at `https://documentation.cloverhealth.com/iamaccessatlas/`
 - **Data source:** Manual export from ServiceNow CMDB Dashboard (`Applications.csv`, `Roles.csv`) → `build_from_csv.py` → embedded `data.js`
 - **Refresh cadence:** Manual, run by Sanjay when CMDB role pages change
 
@@ -32,7 +32,7 @@ IAM Access Atlas/
 └── ROADMAP.md              # Phase-by-phase production-readiness plan
 ```
 
-**Stack philosophy:** Zero-build, zero-framework, zero-dependency static site. This is intentional — keeps the deploy story trivial (Netlify drag-and-drop), keeps maintenance burden near zero, and avoids supply-chain surface area. **Any new dependencies must be vendored into the repo, not pulled from a CDN at runtime.**
+**Stack philosophy:** Zero-build, zero-framework, zero-dependency static site. This is intentional — keeps the deploy story trivial (AWS static hosting), keeps maintenance burden near zero, and avoids supply-chain surface area. **Any new dependencies must be vendored into the repo, not pulled from a CDN at runtime.**
 
 ---
 
