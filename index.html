@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IAM Access Atlas | Clover Health IAM</title>
+  <meta name="description" content="Look up application roles, descriptions, and admin access levels for Clover Health applications." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#12121A" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="IAM Access Atlas | Clover Health IAM" />
+  <meta property="og:description" content="Look up application roles, descriptions, and admin access levels for Clover Health applications." />
+  <meta property="og:image" content="og-image.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="IAM Access Atlas | Clover Health IAM" />
+  <meta name="twitter:description" content="Look up application roles, descriptions, and admin access levels for Clover Health applications." />
+  <meta name="twitter:image" content="og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a href="#app-content" class="skip-link">Skip to content</a>
+
+  <!-- ── Shared SVG icon defs ───────────────────────────────────────────── -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="icon-lock" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="11" width="18" height="11" rx="2" stroke="#9AAED8" stroke-width="2" fill="rgba(154,174,216,0.15)"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#9AAED8" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="12" cy="16" r="1.5" fill="#9AAED8"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24" fill="none">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <!-- ── Compact app navigation bar (shown in app view only) ────────────── -->
+  <header id="app-nav-bar" class="app-nav-bar hidden">
+    <div class="container">
+      <div class="header-brand">
+        <div class="header-logo">
+          <svg width="28" height="28" aria-hidden="true"><use href="#icon-lock"/></svg>
+        </div>
+        <div>
+          <h1 class="header-title">IAM Access Atlas</h1>
+          <p class="header-sub">Clover Health &middot; Identity &amp; Access Management</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── Scroll landing ────────────────────────────────────────────────── -->
+    <div id="scroll-landing">
+
+      <!-- Hero section: full viewport, fades on scroll -->
+      <section id="hero-section" class="hero-section">
+        <div class="hero-content">
+          <div class="hero-logo-wrap">
+            <svg width="52" height="52" aria-hidden="true"><use href="#icon-lock"/></svg>
+          </div>
+          <h1 class="hero-title">IAM Access Atlas</h1>
+          <p class="hero-tagline">Clover Health &middot; Identity &amp; Access Management</p>
+        </div>
+        <div class="hero-scroll-hint" aria-hidden="true">
+          <span>Scroll to explore</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Stats section -->
+      <section id="stats-section" class="stats-section">
+        <div class="container">
+          <h2 class="stats-section-title">Applications Onboard in CloverHealth</h2>
+          <div class="stats-row">
+            <div class="stat" id="stat-btn-apps" role="button" tabindex="0" aria-label="View all applications" title="Click to browse all applications">
+              <span class="stat-number" id="stat-apps">—</span>
+              <span class="stat-label">Applications</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat" id="stat-btn-roles" role="button" tabindex="0" aria-label="View all roles" title="Click to browse all roles">
+              <span class="stat-number" id="stat-roles">—</span>
+              <span class="stat-label">Total Roles</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat" id="stat-btn-phi" role="button" tabindex="0" aria-label="View PHI-covered apps" title="Click to browse PHI-covered applications">
+              <span class="stat-number" id="stat-phi">—</span>
+              <span class="stat-label">PHI-Covered Apps</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mode selection section -->
+      <section id="mode-section" class="mode-section">
+        <div class="container">
+          <div class="landing-heading">
+            <h2 class="landing-title">Who are you here as?</h2>
+            <p class="landing-sub">Select your role to see the most relevant view</p>
+          </div>
+          <div class="mode-cards">
+
+            <button class="mode-card" id="btn-manager">
+              <div class="mode-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2" stroke="#7C8EC8" stroke-width="2" fill="#EAE8F4"/>
+                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" stroke="#7C8EC8" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="2" y1="13" x2="22" y2="13" stroke="#7C8EC8" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="mode-card-title">Manager</div>
+              <div class="mode-card-desc">Review all application roles and access levels for your team's certification</div>
+              <div class="mode-card-arrow">→</div>
+            </button>
+
+            <button class="mode-card" id="btn-staff">
+              <div class="mode-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="8" r="4" stroke="#7C8EC8" stroke-width="2" fill="#EAE8F4"/>
+                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#7C8EC8" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="mode-card-title">Staff</div>
+              <div class="mode-card-desc">Look up your own role and understand what access you have in any application</div>
+              <div class="mode-card-arrow">→</div>
+            </button>
+
+            <button class="mode-card" id="btn-insights">
+              <div class="mode-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="2" y="13" width="5" height="8" rx="1" stroke="#7C8EC8" stroke-width="2" fill="#EAE8F4"/>
+                  <rect x="9.5" y="8" width="5" height="13" rx="1" stroke="#7C8EC8" stroke-width="2" fill="#EAE8F4"/>
+                  <rect x="17" y="3" width="5" height="18" rx="1" stroke="#7C8EC8" stroke-width="2" fill="#EAE8F4"/>
+                </svg>
+              </div>
+              <div class="mode-card-title">Insights</div>
+              <div class="mode-card-desc">Catalog-wide view of role distribution, PHI coverage, and access-risk patterns. For IAM, compliance, and leadership.</div>
+              <div class="mode-card-arrow">→</div>
+            </button>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- end #scroll-landing -->
+
+    <!-- ── App content: Roles view ───────────────────────────────────────── -->
+    <div id="app-content" class="hidden">
+      <div class="container">
+
+        <div class="print-only print-header">
+          <div class="print-app-title" id="print-app-title"></div>
+          <div class="print-meta" id="print-meta"></div>
+        </div>
+
+        <div class="back-row">
+          <button id="back-btn" class="back-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Change view
+          </button>
+          <span id="mode-indicator" class="mode-indicator"></span>
+        </div>
+
+        <div id="announcements-banner" class="announcements-banner hidden" role="status" aria-live="polite" aria-atomic="false"></div>
+
+        <div class="intro-card">
+          <p id="intro-text"></p>
+        </div>
+
+        <div class="controls-card">
+          <div class="controls-row">
+            <div class="control-group">
+              <label class="control-label" for="app-select">Application</label>
+              <div class="select-wrapper">
+                <select id="app-select" aria-label="Select an application">
+                  <option value="">-- Select an application --</option>
+                </select>
+                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" stroke="#6B6B6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="role-search">Search Role</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8" stroke="#6B6B6B" stroke-width="2"/>
+                  <path d="M21 21l-4.35-4.35" stroke="#6B6B6B" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <input
+                  type="text"
+                  id="role-search"
+                  placeholder="Type your role name..."
+                  aria-label="Search for a role"
+                  disabled
+                />
+                <button class="clear-btn hidden" id="clear-search" aria-label="Clear search" title="Clear">
+                  <svg width="14" height="14" aria-hidden="true" style="color:#6B6B6B"><use href="#icon-close"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manager: role filter strip -->
+        <div id="role-filter-strip" class="filter-strip hidden" role="tablist" aria-label="Filter roles">
+          <span class="filter-strip-label" aria-hidden="true">Filter:</span>
+          <button class="filter-pill active" data-filter="all" role="tab" aria-selected="true">All roles</button>
+          <button class="filter-pill" data-filter="admin" role="tab" aria-selected="false">Admin only</button>
+          <button class="filter-pill" data-filter="phi" role="tab" aria-selected="false">PHI-covered only</button>
+        </div>
+
+        <!-- Staff: role comparison panel -->
+        <div id="role-compare-panel" class="compare-panel hidden">
+          <div class="compare-panel-header">
+            <span class="compare-panel-title">Compare two roles</span>
+            <button id="compare-panel-close" class="compare-panel-close" aria-label="Close comparison">
+              <svg width="14" height="14" aria-hidden="true"><use href="#icon-close"/></svg>
+            </button>
+          </div>
+          <div class="compare-selects">
+            <select id="compare-role-a" class="compare-select" aria-label="Role A">
+              <option value="">Select Role A…</option>
+            </select>
+            <select id="compare-role-b" class="compare-select" aria-label="Role B">
+              <option value="">Select Role B…</option>
+            </select>
+          </div>
+          <div id="compare-result" class="compare-result hidden"></div>
+        </div>
+
+        <div id="app-header" class="app-header hidden">
+          <div class="app-header-top">
+            <div class="app-header-inner">
+              <h2 id="app-name" class="app-name"></h2>
+              <span id="draft-badge" class="badge badge-draft hidden">DRAFT</span>
+            </div>
+            <div id="manager-actions" class="manager-actions hidden">
+              <button id="btn-print" class="action-btn" title="Print role list">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <polyline points="6 9 6 2 18 2 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <rect x="6" y="14" width="12" height="8" rx="1" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                Print
+              </button>
+              <button id="btn-copy" class="action-btn" title="Copy roles as tab-separated text">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Copy table
+              </button>
+              <select id="compare-app-select" class="compare-app-select" aria-label="Compare with another application">
+                <option value="">Compare with app…</option>
+              </select>
+              <button id="btn-changelog" class="action-btn" title="View recent role changes">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                What's changed
+              </button>
+            </div>
+          </div>
+          <p id="app-role-count" class="app-role-count"></p>
+          <div id="uar-status-strip" class="uar-status-strip hidden"></div>
+          <button id="btn-compare-roles" class="staff-compare-btn hidden">Compare two roles</button>
+        </div>
+
+        <div id="empty-state" class="empty-state">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="empty-icon">
+            <rect x="3" y="11" width="18" height="11" rx="2" stroke="#C5BDE0" stroke-width="1.5" fill="#F0EDF8"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#C5BDE0" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <p class="empty-title">Select an application to get started</p>
+          <p class="empty-sub" id="empty-sub-text"></p>
+        </div>
+
+        <div id="table-card" class="table-card hidden">
+          <div class="table-scroll">
+            <table id="roles-table">
+              <caption class="sr-only" id="roles-table-caption">Roles for the selected application</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-role">Role</th>
+                  <th scope="col" class="col-description">Description</th>
+                  <th scope="col" class="col-admin">Admin</th>
+                  <th scope="col" class="col-covered hidden" id="covered-header">Covered (PHI)</th>
+                  <th scope="col" class="col-risk hidden" id="risk-header">Risk</th>
+                </tr>
+              </thead>
+              <tbody id="roles-body"></tbody>
+            </table>
+          </div>
+
+          <div id="no-results" class="no-results hidden" role="status" aria-live="polite">
+            <p>No roles match <strong id="no-results-term"></strong>. Try a different search term.</p>
+          </div>
+
+          <div class="table-footer">
+            <p id="result-count" class="result-count" aria-live="polite" aria-atomic="true"></p>
+            <p class="table-note">All roles listed are sourced from CMDB Dashboard. Contact the IAM team for provisioning.</p>
+          </div>
+        </div>
+
+        <!-- Staff: PHI awareness alert -->
+        <div id="phi-alert" class="phi-alert hidden" role="alert">
+          <div class="phi-alert-inner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="phi-alert-icon">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <p><strong>HIPAA Notice:</strong> One or more roles shown gives access to Protected Health Information (PHI). HIPAA obligations apply — contact the Privacy team if you have questions.</p>
+            <button id="phi-alert-dismiss" class="phi-alert-dismiss" aria-label="Dismiss notice" title="Dismiss">
+              <svg width="14" height="14" aria-hidden="true"><use href="#icon-close"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Insights Dashboard ───────────────────────────────────────────── -->
+    <div id="insights-content" class="hidden">
+      <div class="container">
+
+        <div class="back-row">
+          <button id="insights-back-btn" class="back-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Change view
+          </button>
+          <span class="mode-indicator">Insights</span>
+        </div>
+
+        <!-- KPI tile strip -->
+        <div class="insights-kpi-strip">
+          <div class="kpi-tile">
+            <span class="kpi-value" id="kpi-total-apps">—</span>
+            <span class="kpi-label">Applications</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="kpi-value" id="kpi-total-roles">—</span>
+            <span class="kpi-label">Total Roles</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="kpi-value" id="kpi-phi-apps">—</span>
+            <span class="kpi-label">PHI-Covered Apps</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="kpi-value" id="kpi-admin-roles">—</span>
+            <span class="kpi-label">Admin Roles</span>
+          </div>
+          <div class="kpi-tile kpi-tile-alert">
+            <span class="kpi-value" id="kpi-high-risk">—</span>
+            <span class="kpi-label">High-Risk Roles</span>
+          </div>
+        </div>
+
+        <!-- Charts: 2-column grid -->
+        <div class="insights-chart-grid">
+          <div class="chart-card">
+            <h3 class="chart-title">PHI Coverage by App</h3>
+            <div class="chart-canvas-wrap">
+              <canvas id="chart-phi" aria-label="PHI coverage distribution by application count" role="img"></canvas>
+            </div>
+            <table class="sr-only" id="chart-phi-table" aria-label="PHI coverage data">
+              <thead><tr><th scope="col">Category</th><th scope="col">Count</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">Role Risk Distribution</h3>
+            <div class="chart-canvas-wrap">
+              <canvas id="chart-risk" aria-label="Role risk distribution" role="img"></canvas>
+            </div>
+            <table class="sr-only" id="chart-risk-table" aria-label="Risk distribution data">
+              <thead><tr><th scope="col">Risk Level</th><th scope="col">Count</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Top 10 apps by role count -->
+        <div class="chart-card chart-card-full">
+          <h3 class="chart-title">Top 10 Applications by Role Count</h3>
+          <div class="chart-canvas-wrap chart-canvas-wrap-tall">
+            <canvas id="chart-top-apps" aria-label="Top 10 applications by role count" role="img"></canvas>
+          </div>
+          <table class="sr-only" id="chart-top-apps-table" aria-label="Top applications by role count">
+            <thead><tr><th scope="col">Application</th><th scope="col">Roles</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Admin role density -->
+        <div class="chart-card chart-card-full" id="chart-admin-density-card">
+          <h3 class="chart-title">Admin Role Density — Top 10 (apps with ≥3 roles)</h3>
+          <div class="chart-canvas-wrap chart-canvas-wrap-tall">
+            <canvas id="chart-admin-density" aria-label="Admin role density by application" role="img"></canvas>
+          </div>
+          <table class="sr-only" id="chart-admin-density-table" aria-label="Admin role density data">
+            <thead><tr><th scope="col">Application</th><th scope="col">Admin %</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Catalog hygiene flags -->
+        <div class="insights-hygiene">
+          <h3 class="chart-title">Catalog Hygiene Flags</h3>
+          <div id="hygiene-table-wrap"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      
+      <p id="data-timestamp" class="footer-meta"></p>
+    </div>
+  </footer>
+
+  <a href="https://helpdesk.cloverhealth.com/esc?id=sc_cat_item&sys_id=1b2608399798b21003efff7c1253aff0" class="fab" target="_blank" rel="noopener noreferrer" title="Submit an access request via the helpdesk">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    Request Access
+  </a>
+
+  <!-- ── Stat detail modal ───────────────────────────────────────────────── -->
+  <div id="stat-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modal-title" class="modal-title"></h2>
+        <button id="modal-close" class="modal-close" aria-label="Close">
+          <svg width="18" height="18" aria-hidden="true"><use href="#icon-close"/></svg>
+        </button>
+      </div>
+      <div class="modal-search-wrap" id="modal-search-wrap">
+        <input type="text" id="modal-search" class="modal-search" placeholder="Filter…" autocomplete="off" />
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer">
+        <span id="modal-count" class="modal-count"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="data.js"></script>
+  <script src="uar_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Python (build_from_csv.py workflow)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local scratch / temp exports (do not commit source CSVs — data.js is the generated artifact)
+*.csv.bak
